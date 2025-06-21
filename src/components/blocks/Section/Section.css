@@ -39,8 +39,8 @@
 		justify-content: center;
 	}
 
-	.section-with-columns[data-label='section-home-contact'],
-	.section-with-columns[data-label='section-home-recordings'] {
+	.section[data-label='section-home-contact'] .section-with-columns,
+	.section[data-label='section-home-recordings'] .section-with-columns {
 		flex-wrap: wrap;
 		justify-content: center !important;
 	}
@@ -58,4 +58,12 @@
 		padding-top: var(--spacing-md);
 		padding-bottom: var(--spacing-md);
 	}
+}
+
+.section-content {
+	width: 100%;
+	max-width: 1200px; /* Or a variable like var(--max-width-content) */
+	margin: 0 auto;
+	position: relative;
+	z-index: 1; /* Ensures content is above overlays */
 }

@@ -36,25 +36,28 @@ const Section: React.FC<SectionProps> = ({
 	// Check if section contains columns
 	const hasColumns = content.some((block: any) => block._type === 'column')
 
-	const style: React.CSSProperties = {
+	const sectionStyle: React.CSSProperties = {
 		backgroundColor: styles?.backgroundColor || backgroundColor,
 		position: 'relative',
 		paddingTop: extraTop,
 		paddingBottom: extraBottom,
+	}
+
+	const contentStyle: React.CSSProperties = {
 		// Add explicit flex styling when columns are present
 		...(hasColumns && {
 			display: 'flex',
 			alignItems: 'flex-start',
+			justifyContent: 'space-between',
 			gap: '1rem',
 		}),
-		// Apply custom CSS from Sanity
 		...parseCustomCSS(styles?.customCSS),
 	}
 
 	return (
 		<div
-			className={`section${angled ? ' section-angled' : ''}${hasColumns ? ' section-with-columns' : ''}`}
-			style={style}
+			className={`section${angled ? ' section-angled' : ''}`}
+			style={sectionStyle}
 			data-label={block?.label}
 		>
 			{/* Top overlay if previous section is angled */}
@@ -64,7 +67,12 @@ const Section: React.FC<SectionProps> = ({
 					style={{ backgroundColor: prevSectionColor }}
 				/>
 			)}
-			{children}
+			<div
+				className={`section-content${hasColumns ? ' section-with-columns' : ''}`}
+				style={contentStyle}
+			>
+				{children}
+			</div>
 			{/* Bottom overlay if next section is angled */}
 			{nextSectionAngled && nextSectionColor && (
 				<div

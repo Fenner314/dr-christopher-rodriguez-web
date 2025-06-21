@@ -29,6 +29,7 @@
 
 .home-title-container:not(.main-title) .name-container {
 	flex-direction: column;
+	align-items: flex-start;
 }
 
 @media (max-width: 768px) {
