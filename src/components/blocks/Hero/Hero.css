@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
-	height: 88vh;
+	height: 75vh;
 	max-height: 950px;
 	min-height: 600px;
 	display: flex;
