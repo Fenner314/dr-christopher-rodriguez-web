@@ -60,6 +60,7 @@ body {
 
 .parallax-front {
 	transform: translateZ(0);
+	padding-bottom: 64px; /* for navigation bar */
 }
 
 /* Parallax Background Styling */

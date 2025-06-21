@@ -6,32 +6,38 @@ import { ReactComponent as ImagesIcon } from '../../assets/icons/images.svg'
 import { ReactComponent as MailIcon } from '../../assets/icons/mail.svg'
 import { ReactComponent as CalendarIcon } from '../../assets/icons/calendar.svg'
 import { ReactComponent as PageIcon } from '../../assets/icons/document.svg'
+import { ReactComponent as SchoolIcon } from '../../assets/icons/school-outline.svg'
 import { usePagesContext } from '../../contexts/PagesContext'
 import './Navigation.css'
 
 const defaultNavItems = [
 	{
-		icon: <HomeIcon />,
+		icon: <HomeIcon data-label='home-icon' />,
 		label: 'Home',
 		path: '/',
 	},
 	{
-		icon: <PersonIcon />,
+		icon: <PersonIcon data-label='about-icon' />,
 		label: 'About',
 		path: '/about',
 	},
 	{
-		icon: <ImagesIcon />,
-		label: 'Media',
-		path: '/media',
+		icon: <ImagesIcon data-label='gallery-icon' />,
+		label: 'Gallery',
+		path: '/gallery',
 	},
 	{
-		icon: <CalendarIcon />,
-		label: 'Events',
-		path: '/events',
+		icon: <CalendarIcon data-label='calendar-icon' />,
+		label: 'Calendar',
+		path: '/calendar',
 	},
 	{
-		icon: <MailIcon />,
+		icon: <SchoolIcon data-label='teaching-icon' />,
+		label: 'Teaching',
+		path: '/teaching',
+	},
+	{
+		icon: <MailIcon data-label='mail-icon' />,
 		label: 'Contact',
 		path: '/contact',
 	},
