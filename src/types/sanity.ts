@@ -3,10 +3,12 @@
 export interface StyleSettings {
 	backgroundColor?: string
 	customCSS?: string
+	textAlign?: 'left' | 'center' | 'right'
 }
 
 export interface BlockBase {
 	_id: string
+	_key: string
 	label?: string
 	styles?: StyleSettings
 }
@@ -24,13 +26,13 @@ export interface Biography extends BlockBase {
 }
 
 export interface Button extends BlockBase {
-	title: string
-	text: string
-	url: string
-	buttonType: 'primary' | 'secondary' | 'tertiary'
-	colorScheme: 'primary' | 'secondary' | 'accent'
-	width: 'stretch' | 'fit'
-	size: 'small' | 'medium' | 'large'
+	title?: string
+	text?: string
+	url?: string
+	buttonType?: 'contained' | 'outlined' | 'text'
+	colorScheme?: 'primary' | 'secondary' | 'accent'
+	width?: 'stretch' | 'fit'
+	size?: 'small' | 'medium' | 'large'
 	customStyles?: {
 		backgroundColor?: { hex: string }
 		textColor?: { hex: string }
@@ -55,6 +57,7 @@ export interface MediaImage extends BlockBase {
 	image: any
 	description?: string
 	organization?: string
+	youtubeUrl?: string
 }
 
 export interface VideoRecording extends BlockBase {

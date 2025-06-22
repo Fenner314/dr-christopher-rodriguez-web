@@ -24,7 +24,10 @@ const Title: React.FC<TitleProps> = ({ block, children }) => {
 			data-page={children}
 			data-label={block?.label}
 		>
-			<h2 className='title' style={{ color: block?.color }}>
+			<h2
+				className='title'
+				style={{ color: block?.color, textAlign: block?.alignment ?? 'inherit' }}
+			>
 				{children ?? block?.text}
 			</h2>
 		</div>

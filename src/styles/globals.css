@@ -360,6 +360,16 @@ a:hover {
 	color: var(--text-white);
 }
 
+.align-left {
+	text-align: left;
+}
+.align-center {
+	text-align: center;
+}
+.align-right {
+	text-align: right;
+}
+
 .font-serif {
 	font-family: var(--font-family-serif);
 }

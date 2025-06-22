@@ -98,37 +98,82 @@ export const PagesProvider: React.FC<{ children: React.ReactNode }> = ({
 	const fetchAllPages = async (updateCache = true) => {
 		try {
 			const query = `*[_type == "page"]{
-                _id,
-                title,
-                slug,
-                pageType,
-                customComponent,
-                index,
-                content[]{
-                    ...,
-                    downloads[]->,
-                    button->,
-                    "images": images[]{
-                        "_key": _key,
-                        "_type": _type,
-                        ...*[_type == "mediaImage" && _id == ^._ref][0]{
-                            title,
-                            image,
-                            alt,
-                            styles,
-                            width,
-                            borderRadius,
-                            description,
-                            organization,
-                            role,
-                            year,
-                            director,
-                            conductor,
-                            photographer
-                        }
-                    }
-                }
-            }`
+				_id,
+				title,
+				slug,
+				pageType,
+				customComponent,
+				index,
+				content[]{
+					...,
+					downloads[]->,
+					button->,
+					_type == "section" => {
+						...,
+						content[]{
+							...,
+							_type == "gallery" => {
+								...,
+								items[]{
+									_key,
+									"data": *[_id == ^._ref][0]{
+										_id,
+										_type,
+										title,
+										image,
+										alt,
+										styles,
+										width,
+										borderRadius,
+										description,
+										organization,
+										role,
+										year,
+										director,
+										conductor,
+										photographer,
+										youtubeUrl,
+										content
+									}
+								}
+							},
+							_type == "videoGallery" => {
+								...,
+								items[]{
+									_key,
+									"data": *[_id == ^._ref][0]{
+										_id,
+										_type,
+										title,
+										url,
+										description
+									}
+								}
+							}
+						}
+					},
+					images[]{
+						_key,
+						"data": *[_id == ^._ref][0]{
+							_id,
+							_type,
+							title,
+							image,
+							alt,
+							styles,
+							width,
+							borderRadius,
+							description,
+							organization,
+							role,
+							year,
+							director,
+							conductor,
+							photographer
+						}
+					}
+				}
+			}`
 
 			// @ts-ignore
 			const data = await client.fetch(query)

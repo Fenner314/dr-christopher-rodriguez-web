@@ -9,6 +9,7 @@ interface BlockWrapperProps {
 	fullWidth?: boolean
 	styles?: StyleSettings
 	label?: string
+	alignment?: 'left' | 'center' | 'right'
 }
 
 const BlockWrapper: React.FC<BlockWrapperProps> = ({
@@ -17,6 +18,7 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({
 	fullWidth = false,
 	styles,
 	label,
+	alignment,
 }) => {
 	const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -69,7 +71,7 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({
 	return (
 		<div
 			ref={wrapperRef}
-			className={`block-wrapper ${fullWidth ? 'full-width' : ''}`}
+			className={`block-wrapper ${fullWidth ? 'full-width' : ''} ${alignment ? `align-${alignment}` : ''}`}
 			data-block-type={type}
 			style={wrapperStyle}
 			data-label={label}

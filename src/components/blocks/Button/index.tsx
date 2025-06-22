@@ -19,6 +19,7 @@ interface BlockType {
 	openInNewTab?: boolean
 	ariaLabel?: string
 	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+	textAlign?: 'left' | 'center' | 'right'
 }
 
 interface ButtonProps {
@@ -33,6 +34,10 @@ const Button: React.FC<ButtonProps> = ({ block, ...props }) => {
 	// Only keep custom styles that can't be handled by CSS classes
 	const getCustomStyles = () => {
 		const styles: React.CSSProperties = { ...props.styles }
+
+		if (block.textAlign) {
+			styles.textAlign = block.textAlign
+		}
 
 		if (block.customStyles?.backgroundColor) {
 			styles.backgroundColor = block.customStyles.backgroundColor.hex

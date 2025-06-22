@@ -10,6 +10,7 @@ import BlockWrapper from '../components/blocks/BlockWrapper'
 import { getCustomPageComponent } from './customPageComponents'
 import Column from '../components/blocks/Column'
 import Gallery from '../components/blocks/Gallery'
+import VideoGallery from '../components/blocks/VideoGallery'
 import Testimonial from '../components/blocks/Testimonial'
 import TextBlock from '../components/blocks/TextBlock'
 import YoutubeVideo from '../components/blocks/YoutubeVideo'
@@ -17,6 +18,7 @@ import Title from '../components/custom/Title'
 
 interface RenderContext {
 	isInMediaGrid?: boolean
+	isInVideoGrid?: boolean
 }
 
 const renderBlock = (block: any, context: RenderContext = {}) => {
@@ -68,6 +70,8 @@ const renderBlock = (block: any, context: RenderContext = {}) => {
 				return <Column block={block} />
 			case 'gallery':
 				return <Gallery block={block} />
+			case 'videoGallery':
+				return <VideoGallery block={block} />
 			case 'testimonial':
 				return <Testimonial block={block} />
 			case 'title':
@@ -96,6 +100,7 @@ const renderBlock = (block: any, context: RenderContext = {}) => {
 			fullWidth={fullWidth}
 			styles={block.styles}
 			label={block.label}
+			alignment={block.alignment}
 		>
 			{content}
 		</BlockWrapper>

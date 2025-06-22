@@ -1,0 +1,51 @@
+.video-gallery-block {
+	padding: 2rem 0;
+}
+
+.video-gallery-title {
+	font-size: 2.5rem;
+	text-align: center;
+	margin-bottom: 2rem;
+	font-family: var(--font-family-serif);
+}
+
+.video-gallery-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: flex-start;
+}
+
+/* Style for video items when rendered through renderBlock */
+.video-gallery-grid > * {
+	flex: 0 0 calc((100% - 4rem) / 3);
+	min-width: 320px;
+}
+
+.video-item-title {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-bold);
+	margin-bottom: 0;
+	padding: 1rem 1rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+	.video-gallery-grid > * {
+		flex: 0 0 calc((100% - 2rem) / 2);
+	}
+}
+
+@media (max-width: 826px) {
+	.video-gallery-grid > * {
+		flex: 0 0 100%;
+	}
+
+	.video-gallery-grid {
+		gap: 1.5rem;
+	}
+
+	.video-gallery-title {
+		font-size: 2rem;
+	}
+}

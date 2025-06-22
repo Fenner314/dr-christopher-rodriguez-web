@@ -20,13 +20,9 @@ interface TextBlockProps {
 const TextBlock: React.FC<TextBlockProps> = ({ block }) => {
 	const { alignment = 'left', maxWidth = '100%', label, content } = block
 	return (
-		<div
-			className={`text-block align-${alignment}`}
-			style={{ maxWidth }}
-			data-label={label}
-		>
+		<div className={`text-block`} style={{ maxWidth }} data-label={label}>
 			{content?.content && (
-				<div className='rich-text'>
+				<div className={`rich-text align-${alignment}`}>
 					<PortableText
 						value={content.content}
 						components={portableTextComponents}
