@@ -113,15 +113,31 @@
 	opacity: 0.9;
 }
 
-.button-section.secondary.primary .button-link:hover .button-element {
+.button-section.secondary.primary:not(.text)
+	.button-link:hover
+	.button-element {
+	background-color: rgba(var(--primary-rgb), 0.8);
+}
+
+.button-section.secondary.accent:not(.text) .button-link:hover .button-element {
+	background-color: rgba(var(--accent-rgb), 0.8);
+}
+
+.button-section.secondary.secondary:not(.text)
+	.button-link:hover
+	.button-element {
+	background-color: rgba(var(--secondary-rgb), 0.8);
+}
+
+.button-section.secondary.primary.text .button-link:hover .button-element {
 	background-color: rgba(var(--primary-rgb), 0.08);
 }
 
-.button-section.secondary.accent .button-link:hover .button-element {
+.button-section.secondary.accent.text .button-link:hover .button-element {
 	background-color: rgba(var(--accent-rgb), 0.08);
 }
 
-.button-section.secondary.secondary .button-link:hover .button-element {
+.button-section.secondary.secondary.text .button-link:hover .button-element {
 	background-color: rgba(var(--secondary-rgb), 0.08);
 }
 

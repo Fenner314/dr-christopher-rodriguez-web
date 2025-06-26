@@ -167,7 +167,8 @@ const EventsComponent: React.FC<CustomComponentProps> = ({
 		}
 
 		// Store the exact scroll position
-		const scrollPosition = window.scrollY
+		const scrollPosition =
+			document.getElementById('parallax-container')?.scrollTop || 0
 
 		try {
 			const yearEvents = await fetchEventsForYear(year, isCurrentYearFirstHalf)
@@ -185,7 +186,7 @@ const EventsComponent: React.FC<CustomComponentProps> = ({
 			// After state updates, restore exact scroll position
 			if (append) {
 				requestAnimationFrame(() => {
-					window.scrollTo({
+					document.getElementById('parallax-container')?.scrollTo({
 						top: scrollPosition,
 						// @ts-ignore
 						behavior: 'instant',
@@ -267,6 +268,30 @@ const EventsComponent: React.FC<CustomComponentProps> = ({
 	// For preview mode, show only the first 3 upcoming events
 	const displayEvents = props.preview ? upcomingEvents.slice(0, 3) : undefined
 
+	const formatEventDate = (start: string, end?: string) => {
+		const startDate = new Date(start)
+		const endDate = end ? new Date(end) : null
+
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		}
+
+		if (!endDate || startDate.toDateString() === endDate.toDateString()) {
+			// Single day event
+			return startDate.toLocaleDateString('en-US', options)
+		} else {
+			// Multi-day event
+			const startMonth = startDate.toLocaleDateString('en-US', { month: 'long' })
+			const startDay = startDate.getDate()
+			const endDay = endDate.getDate()
+			const year = startDate.getFullYear()
+
+			return `${startMonth} ${startDay} - ${endDay}, ${year}`
+		}
+	}
+
 	const EventList = ({ events, title }: { events: Event[]; title?: string }) => (
 		<>
 			{title && (
@@ -284,116 +309,64 @@ const EventsComponent: React.FC<CustomComponentProps> = ({
 			>
 				{events.map((event) => (
 					<div className='event-wrapper'>
-						{event.featured && <div className='featured-badge'>Featured</div>}
-						<div
-							key={event.id}
-							className={`event-item ${event.featured ? 'featured' : ''}`}
-						>
-							<h3
-								className='media-title'
-								style={{
-									marginBottom: '0.75rem',
-								}}
-							>
-								{event.title}
-							</h3>
-							{event.role && <p className='event-role'>{event.role}</p>}
-							{event.start && (
-								<p
-									style={{
-										color: event.featured ? 'var(--dark)' : '',
-										fontWeight: '600',
-										marginBottom: '0.5rem',
-										fontSize: '1rem',
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.5rem',
-									}}
-								>
-									<img
-										src={calendarIcon}
-										alt='Calendar'
-										style={{
-											width: '16px',
-											height: '16px',
-											objectFit: 'contain',
-										}}
-									/>{' '}
-									{new Date(event.start).toLocaleDateString('en-US', {
-										weekday: 'long',
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric',
-										hour: '2-digit',
-										minute: '2-digit',
-									})}
-									{event.end && (
-										<span style={{ fontSize: '0.9rem', opacity: 0.8 }}>
-											{' - '}
-											{new Date(event.end).toLocaleTimeString('en-US', {
-												hour: '2-digit',
-												minute: '2-digit',
-											})}
-										</span>
-									)}
-								</p>
-							)}
-							{event.location && (
-								<p
+						<div key={event.id} className={`event-item`}>
+							<div className='event-date'>
+								<span className='event-date-text'>
+									{formatEventDate(event?.start || '', event?.end || '')}
+								</span>
+							</div>
+							<div className='event-details'>
+								<h3
+									className='event-title'
 									style={{
 										marginBottom: '0.75rem',
-										color: event.featured ? 'var(--dark)' : 'var(--dark)',
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.5rem',
 									}}
 								>
-									<img
-										src={pinIcon}
-										alt='Location'
-										style={{
-											width: '16px',
-											height: '16px',
-											objectFit: 'contain',
+									{event.title}
+								</h3>
+								{event.description && (
+									<p className='event-description'>{event.description}</p>
+								)}
+								<div className='event-extra-info'>
+									{event.location && (
+										<p
+											style={{
+												marginBottom: '0.75rem',
+												color: event.featured ? 'var(--dark)' : 'var(--dark)',
+												display: 'flex',
+												alignItems: 'center',
+												gap: '0.5rem',
+											}}
+										>
+											{event.location}
+										</p>
+									)}
+									{event.role && <p className='event-role'>{event.role}</p>}
+									{event.ensemble && (
+										<p className='event-ensemble m-0'>{event.ensemble}</p>
+									)}
+									{event.extraProps &&
+										event.extraProps?.map((prop) => (
+											<p key={prop} className='event-extra-prop m-0'>
+												{prop}
+											</p>
+										))}
+								</div>
+								{event.url && (
+									<Button
+										block={{
+											_type: 'button',
+											text: 'View Details',
+											url: event.url,
+											buttonType: 'contained',
+											colorScheme: 'secondary',
+											size: 'small',
+											openInNewTab: true,
 										}}
+										styles={{ marginTop: '1rem' }}
 									/>
-									<span>{event.location}</span>
-								</p>
-							)}
-							{event.description && (
-								<p
-									style={{
-										lineHeight: '1.5',
-										color: event.featured ? 'var(--dark)' : 'var(--dark)',
-									}}
-									className='m-0'
-								>
-									{event.description}
-								</p>
-							)}
-							{event.ensemble && (
-								<p className='event-ensemble m-0'>{event.ensemble}</p>
-							)}
-							{event.extraProps &&
-								event.extraProps?.map((prop) => (
-									<p key={prop} className='event-extra-prop m-0'>
-										{prop}
-									</p>
-								))}
-							{event.url && (
-								<Button
-									block={{
-										_type: 'button',
-										text: 'View Details',
-										url: event.url,
-										buttonType: 'outlined',
-										colorScheme: 'primary',
-										size: 'small',
-										openInNewTab: true,
-									}}
-									styles={{ marginTop: '1rem' }}
-								/>
-							)}
+								)}
+							</div>
 						</div>
 					</div>
 				))}
@@ -449,7 +422,7 @@ const EventsComponent: React.FC<CustomComponentProps> = ({
 									: `Load Past Events (${currentYear - allLoadedYears.length} - ${currentYear - allLoadedYears.length + 1})`,
 								url: '#',
 								buttonType: 'text',
-								colorScheme: 'primary',
+								colorScheme: 'secondary',
 								size: 'medium',
 								customStyles: loadingMore
 									? {

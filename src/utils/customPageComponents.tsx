@@ -14,7 +14,7 @@ export interface CustomComponentProps {
 // Registry of custom components
 const customComponents: Record<string, React.FC<CustomComponentProps>> = {
 	'contact-form': ContactForm,
-	events: Events,
+	calendar: Events,
 }
 
 export const getCustomPageComponent = (

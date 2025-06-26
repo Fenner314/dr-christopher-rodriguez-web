@@ -6,11 +6,12 @@
 	/* Brand Colors */
 	--primary: #5c1618;
 	--secondary: #d49153;
+	--secondary-light: #ffc098;
 	/* --accent: #9bc691; */
 
 	/* RGB values for opacity usage */
-	--primary-rgb: 100, 9, 26;
-	--secondary-rgb: 194, 174, 145;
+	--primary-rgb: 92, 22, 24;
+	--secondary-rgb: 212, 145, 83;
 	--accent-rgb: 155, 198, 145;
 	--bg-dark-rgb: 40, 4, 11;
 	--bg-light-rgb: 245, 245, 238;
@@ -362,12 +363,6 @@ a:hover {
 
 .align-left {
 	text-align: left;
-}
-.align-center {
-	text-align: center;
-}
-.align-right {
-	text-align: right;
 }
 
 .font-serif {
