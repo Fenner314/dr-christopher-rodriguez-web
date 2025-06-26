@@ -8,6 +8,10 @@
 	flex-direction: column;
 }
 
+.section[data-label='section-contact'] > .section-with-columns {
+	flex-wrap: wrap;
+}
+
 .contact-form-input,
 .contact-form-textarea {
 	width: 100%;
