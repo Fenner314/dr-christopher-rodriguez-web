@@ -136,6 +136,9 @@
 }
 
 @media (max-width: 600px) {
+	.testimonial-gallery-root {
+		padding: 0;
+	}
 	.testimonial-gallery-title {
 		font-size: 1.2rem;
 	}
