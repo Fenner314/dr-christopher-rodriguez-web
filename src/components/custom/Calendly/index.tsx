@@ -11,7 +11,6 @@ interface CalendlyProps extends CustomComponentProps {
 
 const Calendly: React.FC<CalendlyProps> = ({
 	calendlyUrl = 'https://calendly.com/drcrodriguez',
-	minWidth = '720px',
 	height: initialHeight = '500px',
 }) => {
 	const [height, setHeight] = useState(initialHeight)
@@ -32,7 +31,8 @@ const Calendly: React.FC<CalendlyProps> = ({
 			<InlineWidget
 				url={calendlyUrl}
 				styles={{
-					minWidth: minWidth,
+					width: '90vw',
+					maxWidth: '720px',
 					height: renderHeight(height),
 				}}
 			/>
