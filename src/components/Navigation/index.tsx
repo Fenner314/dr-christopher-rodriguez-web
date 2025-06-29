@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as PersonIcon } from '../../assets/icons/person.svg'
@@ -49,11 +49,17 @@ const Navigation = () => {
 	const { pages, isLoading } = usePagesContext()
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
+	const navBarRef = useRef<HTMLDivElement>(null)
+	const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+	const [indicatorStyle, setIndicatorStyle] = useState<{
+		left: number
+		width: number
+	}>({ left: 0, width: 0 })
+
 	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth < 768)
 		}
-
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
@@ -86,17 +92,27 @@ const Navigation = () => {
 
 	const isValidPage = activeIndex !== -1
 
-	const indicatorStyle = isValidPage
-		? isMobile
-			? {
-					left: `${activeIndex * (100 / navItems.length)}%`,
-					width: `${100 / navItems.length}%`,
-				}
-			: {
-					top: `calc(50% - ${(navItems.length * 76) / 2}px + ${activeIndex * 76}px)`,
-					height: '64px',
-					'--indicator-height': '64px',
-				}
+	// Update indicator position and scroll selected item into view (mobile only)
+	useEffect(() => {
+		if (!isMobile || !isValidPage) return
+		const el = navItemRefs.current[activeIndex]
+		const navBar = navBarRef.current
+		if (el && navBar) {
+			setIndicatorStyle({
+				left: el.offsetLeft - navBar.scrollLeft,
+				width: el.offsetWidth,
+			})
+			el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+		}
+	}, [activeIndex, isMobile, navItems.length, isValidPage])
+
+	const desktopIndicatorStyle = isValidPage
+		? {
+				// vertical nav
+				top: `calc(50% - ${(navItems.length * 76) / 2}px + ${activeIndex * 76}px)`,
+				height: '64px',
+				'--indicator-height': '64px',
+			}
 		: {
 				display: 'none',
 			}
@@ -104,13 +120,23 @@ const Navigation = () => {
 	return (
 		<nav className='mobile-nav'>
 			<div className='nav-indicator-container'>
-				<div className='nav-indicator' style={indicatorStyle} />
+				<div
+					className='nav-indicator'
+					style={
+						isMobile
+							? { left: indicatorStyle.left, width: indicatorStyle.width }
+							: desktopIndicatorStyle
+					}
+				/>
 			</div>
-			<div className='nav-items'>
-				{navItems.map((item) => (
+			<div className='nav-items' ref={navBarRef}>
+				{navItems.map((item, idx) => (
 					<Link
 						key={item.label}
 						to={item.path}
+						ref={(el) => {
+							navItemRefs.current[idx] = el
+						}}
 						className={`nav-item ${
 							(item.path === '/' ? path === 'home' : item.path.slice(1) === path)
 								? 'active'
