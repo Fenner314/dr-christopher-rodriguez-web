@@ -119,6 +119,7 @@ const DynamicPage: React.FC = () => {
 		const prev = arr && arr[index - 1]
 
 		if (block._type === 'hero') {
+			const isFirst = index === 0
 			const hasNextAngled = next?._type === 'section' && next.angled
 			const hasPrevAngled = prev?._type === 'section' && prev.angled
 
@@ -136,6 +137,7 @@ const DynamicPage: React.FC = () => {
 						bottomAngleColor={
 							next.backgroundColor || next.sectionColor || 'var(--primary)'
 						}
+						isFirst={isFirst}
 					/>
 				)
 			} else if (hasNextAngled) {
@@ -147,6 +149,7 @@ const DynamicPage: React.FC = () => {
 						angled={true}
 						anglePosition='bottom-left'
 						angleColor={next.backgroundColor || next.sectionColor || 'var(--primary)'}
+						isFirst={isFirst}
 					/>
 				)
 			} else if (hasPrevAngled) {
@@ -158,10 +161,17 @@ const DynamicPage: React.FC = () => {
 						angled={true}
 						anglePosition='top-right'
 						angleColor={prev.backgroundColor || prev.sectionColor || 'var(--primary)'}
+						isFirst={isFirst}
 					/>
 				)
 			}
-			return <Hero key={block._key || block._id || index} block={block} />
+			return (
+				<Hero
+					key={block._key || block._id || index}
+					block={block}
+					isFirst={isFirst}
+				/>
+			)
 		}
 
 		if (block._type === 'section') {

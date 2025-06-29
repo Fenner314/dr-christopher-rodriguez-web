@@ -103,3 +103,19 @@ export interface CustomComponent extends BlockBase {
 	componentName: string
 	props?: string // JSON string
 }
+
+export interface Testimonial extends BlockBase {
+	label?: string
+	quote: string
+	name: string
+	title?: string
+	company?: string
+	image?: any
+	rating?: number
+}
+
+export interface TestimonialGallery extends BlockBase {
+	title: string
+	image?: any
+	testimonials: Testimonial[]
+}

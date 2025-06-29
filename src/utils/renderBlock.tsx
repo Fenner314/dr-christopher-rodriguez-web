@@ -15,6 +15,7 @@ import Testimonial from '../components/blocks/Testimonial'
 import TextBlock from '../components/blocks/TextBlock'
 import YoutubeVideo from '../components/blocks/YoutubeVideo'
 import Title from '../components/custom/Title'
+import TestimonialGallery from '../components/custom/TestimonialGallery'
 
 interface RenderContext {
 	isInMediaGrid?: boolean
@@ -47,6 +48,9 @@ const renderBlock = (block: any, context: RenderContext = {}) => {
 
 			case 'videoRecording':
 				return <VideoRecording block={block} />
+
+			case 'testimonialGallery':
+				return <TestimonialGallery block={block} />
 
 			case 'customComponent':
 				const CustomComponent = getCustomPageComponent(block.componentName)

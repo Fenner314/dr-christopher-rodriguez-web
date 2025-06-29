@@ -44,7 +44,6 @@
 .rich-text {
 	font-family: var(--font-family-serif);
 	line-height: var(--line-height-relaxed);
-	max-width: 95ch;
 }
 
 .rich-text h1,

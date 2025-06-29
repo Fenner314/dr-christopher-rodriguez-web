@@ -1,0 +1,20 @@
+.calendly-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 2rem 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.calendly-container {
+		margin: 1rem 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.calendly-container {
+		margin: 0.5rem 0;
+	}
+}

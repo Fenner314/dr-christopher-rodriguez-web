@@ -3,6 +3,7 @@ import React from 'react'
 // Import your custom page components
 import ContactForm from '../components/custom/ContactForm'
 import Events from '../components/custom/Events'
+import Calendly from '../components/custom/Calendly'
 import { BlockBase } from '../types/sanity'
 
 export interface CustomComponentProps {
@@ -15,6 +16,7 @@ export interface CustomComponentProps {
 const customComponents: Record<string, React.FC<CustomComponentProps>> = {
 	'contact-form': ContactForm,
 	calendar: Events,
+	calendly: Calendly,
 }
 
 export const getCustomPageComponent = (

@@ -2,7 +2,7 @@
 	position: relative;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
-	height: 80vh;
+	height: 100vh;
 	max-height: 950px;
 	min-height: 600px;
 	display: flex;
@@ -117,4 +117,9 @@
 .hero-angled-overlay.top-right {
 	top: -1px;
 	clip-path: polygon(100% 75%, 0 1%, 0 0, 100% 0);
+}
+
+.hero-section--first {
+	height: 80vh;
+	min-height: 400px;
 }

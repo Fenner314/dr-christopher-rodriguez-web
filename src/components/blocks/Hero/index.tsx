@@ -19,6 +19,7 @@ interface HeroProps {
 	angleColor?: string
 	topAngleColor?: string
 	bottomAngleColor?: string
+	isFirst?: boolean
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -28,6 +29,7 @@ const Hero: React.FC<HeroProps> = ({
 	angleColor,
 	topAngleColor,
 	bottomAngleColor,
+	isFirst,
 }) => {
 	const { updateParallaxSectionPosition } = usePagesContext()
 
@@ -47,7 +49,7 @@ const Hero: React.FC<HeroProps> = ({
 		<div
 			key={block._key || block._id}
 			id={block._key}
-			className={`hero-section ${block.parallax ? 'parallax' : ''}`}
+			className={`hero-section${isFirst ? ' hero-section--first' : ''} ${block.parallax ? 'parallax' : ''}`}
 			data-page={block.label}
 		>
 			{/* Angled overlay logic */}
