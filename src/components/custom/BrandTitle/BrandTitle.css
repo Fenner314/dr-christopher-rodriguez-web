@@ -35,5 +35,10 @@
 @media (max-width: 768px) {
 	.home-title-container .name-container {
 		flex-direction: column;
+		font-size: clamp(32px, 10vw, 42px);
+	}
+
+	.home-title-container .initial {
+		font-size: clamp(68px, 22vw, 84px);
 	}
 }
