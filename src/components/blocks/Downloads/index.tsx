@@ -1,5 +1,7 @@
 import React from 'react'
 import './Downloads.css'
+import { PortableText } from '@portabletext/react'
+import { portableTextComponents } from '../../../utils/portableTextComponents'
 
 interface DownloadsProps {
 	block: {
@@ -7,6 +9,7 @@ interface DownloadsProps {
 		_id?: string
 		_type: 'downloads'
 		title?: string
+		description?: any
 		downloads?: Array<{
 			_id: string
 			title: string
@@ -21,6 +24,14 @@ const Downloads: React.FC<DownloadsProps> = ({ block }) => {
 	return (
 		<div key={block._key || block._id} className='downloads-section'>
 			{block.title && <h2 className='section-title'>{block.title}</h2>}
+			{block.description && (
+				<div className='rich-text'>
+					<PortableText
+						value={block.description?.content}
+						components={portableTextComponents}
+					/>
+				</div>
+			)}
 			{block.downloads && block.downloads.length > 0 && (
 				<div className='downloads-grid'>
 					{block.downloads.map((download) => (

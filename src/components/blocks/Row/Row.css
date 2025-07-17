@@ -1,0 +1,21 @@
+.row-block {
+	width: 100%;
+	min-height: 0;
+}
+
+.row-block > * {
+	flex-shrink: 0;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+	.row-block {
+		flex-direction: column !important;
+		gap: 1rem !important;
+	}
+
+	.row-block > * {
+		width: 100% !important;
+		flex-basis: 100% !important;
+	}
+}

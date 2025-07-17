@@ -119,3 +119,25 @@ export interface TestimonialGallery extends BlockBase {
 	image?: any
 	testimonials: Testimonial[]
 }
+
+export interface Column extends BlockBase {
+	title?: string
+	content?: any[]
+	alignment?: 'left' | 'center' | 'right'
+	width?: string
+	padding?: string
+}
+
+export interface Row extends BlockBase {
+	title?: string
+	columns?: Column[]
+	alignment?:
+		| 'flex-start'
+		| 'center'
+		| 'flex-end'
+		| 'space-between'
+		| 'space-around'
+		| 'space-evenly'
+	gap?: string
+	wrap?: boolean
+}

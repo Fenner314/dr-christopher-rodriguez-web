@@ -9,6 +9,7 @@ import VideoRecording from '../components/blocks/VideoRecording'
 import BlockWrapper from '../components/blocks/BlockWrapper'
 import { getCustomPageComponent } from './customPageComponents'
 import Column from '../components/blocks/Column'
+import Row from '../components/blocks/Row'
 import Gallery from '../components/blocks/Gallery'
 import VideoGallery from '../components/blocks/VideoGallery'
 import Testimonial from '../components/blocks/Testimonial'
@@ -72,6 +73,8 @@ const renderBlock = (block: any, context: RenderContext = {}) => {
 
 			case 'column':
 				return <Column block={block} />
+			case 'row':
+				return <Row block={block} />
 			case 'gallery':
 				return <Gallery block={block} />
 			case 'videoGallery':
