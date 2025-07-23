@@ -11,7 +11,7 @@ interface CalendlyProps extends CustomComponentProps {
 
 const Calendly: React.FC<CalendlyProps> = ({
 	calendlyUrl = 'https://calendly.com/drcrodriguez',
-	height: initialHeight = '500px',
+	height: initialHeight = '300px',
 }) => {
 	const [height, setHeight] = useState(initialHeight)
 
