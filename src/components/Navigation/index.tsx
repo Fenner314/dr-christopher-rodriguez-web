@@ -33,6 +33,11 @@ const defaultNavItems = [
 		path: '/calendar',
 	},
 	{
+		icon: <PoetryIcon data-label='poetry-icon' />,
+		label: 'Poetry',
+		path: '/poetry',
+	},
+	{
 		icon: <SchoolIcon data-label='teaching-icon' />,
 		label: 'Teaching',
 		path: '/teaching',
@@ -41,11 +46,6 @@ const defaultNavItems = [
 		icon: <MailIcon data-label='mail-icon' />,
 		label: 'Contact',
 		path: '/contact',
-	},
-	{
-		icon: <PoetryIcon data-label='poetry-icon' />,
-		label: 'Poetry',
-		path: '/poetry',
 	},
 ]
 
