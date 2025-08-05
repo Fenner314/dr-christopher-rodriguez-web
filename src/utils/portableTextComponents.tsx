@@ -53,8 +53,18 @@ export const portableTextComponents = {
 				{children}
 			</blockquote>
 		),
-		normal: ({ children }: any) => (
-			<p style={{ marginBottom: '1rem' }}>{children}</p>
-		),
+		normal: (props: any) => {
+			const { children, value } = props
+			// Check if this block is a single empty span
+			const isEmptyLine =
+				Array.isArray(value.children) &&
+				value.children.length === 1 &&
+				value.children[0]._type === 'span' &&
+				!value.children[0].text
+			if (isEmptyLine) {
+				return <div style={{ marginBottom: '1rem' }} />
+			}
+			return <p style={{ marginBottom: 0 }}>{children}</p>
+		},
 	},
 }

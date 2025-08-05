@@ -1,5 +1,6 @@
 .block-wrapper {
 	width: 100%;
+	margin-bottom: 1rem;
 }
 
 .block-wrapper.full-width {

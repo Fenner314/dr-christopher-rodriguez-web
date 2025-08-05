@@ -21,11 +21,24 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({
 	alignment,
 }) => {
 	const wrapperRef = useRef<HTMLDivElement>(null)
+	const prevPropertiesRef = useRef<string[]>([])
 
-	// Apply !important styles directly to the element
 	useEffect(() => {
 		const element = wrapperRef.current
-		if (!element || !styles?.customCSS) return
+		if (!element) return
+
+		// Remove previous !important styles
+		prevPropertiesRef.current.forEach((property) => {
+			const key = property.split(':')[0]?.trim()
+			if (key) {
+				element.style.removeProperty(key)
+			}
+		})
+
+		if (!styles?.customCSS) {
+			prevPropertiesRef.current = []
+			return
+		}
 
 		const trimmedCSS = styles.customCSS.trim()
 		const properties = trimmedCSS
@@ -46,21 +59,10 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({
 			}
 		})
 
-		// Cleanup function to remove styles when component unmounts
-		return () => {
-			if (element) {
-				const properties = trimmedCSS
-					.split(';')
-					.map((prop) => prop.trim())
-					.filter(Boolean)
-				properties.forEach((property) => {
-					const key = property.split(':')[0]?.trim()
-					if (key) {
-						element.style.removeProperty(key)
-					}
-				})
-			}
-		}
+		// Save current properties for cleanup next time
+		prevPropertiesRef.current = properties.filter((property) =>
+			property.includes('!important')
+		)
 	}, [styles?.customCSS])
 
 	const wrapperStyle: React.CSSProperties = {

@@ -4,6 +4,7 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as PersonIcon } from '../../assets/icons/person.svg'
 import { ReactComponent as ImagesIcon } from '../../assets/icons/images.svg'
 import { ReactComponent as MailIcon } from '../../assets/icons/mail.svg'
+import { ReactComponent as PoetryIcon } from '../../assets/icons/poetry.svg'
 import { ReactComponent as CalendarIcon } from '../../assets/icons/calendar.svg'
 import { ReactComponent as PageIcon } from '../../assets/icons/document.svg'
 import { ReactComponent as SchoolIcon } from '../../assets/icons/school-outline.svg'
@@ -40,6 +41,11 @@ const defaultNavItems = [
 		icon: <MailIcon data-label='mail-icon' />,
 		label: 'Contact',
 		path: '/contact',
+	},
+	{
+		icon: <PoetryIcon data-label='poetry-icon' />,
+		label: 'Poetry',
+		path: '/poetry',
 	},
 ]
 
